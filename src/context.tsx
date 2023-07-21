@@ -6,7 +6,7 @@ type cell = {
     setText: React.Dispatch<React.SetStateAction<string>>;
     handleTodoInput: () => void
 }
-const Context = createContext<cell | null>(null);
+const context = createContext<cell | null>(null);
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [todo, setTodo] = useState<string[]>([]);
     const [text, setText] = useState<string>('');
@@ -15,11 +15,11 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
         setTodo([...todo, text]);
     }
 
-    return <Context.Provider value={{ text, setText, handleTodoInput, todo }}>{children}</Context.Provider>
+    return <context.Provider value={{ text, setText, handleTodoInput, todo }}>{children}</context.Provider>
 }
 
 export const useMainContext = () => {
-    const usecontext = useContext(Context)
+    const usecontext = useContext(context)
 
     if (!usecontext) {
         throw new Error('Not Wrapped')
